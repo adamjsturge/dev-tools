@@ -14,8 +14,7 @@
 	}
 
 	function copyToClipboard() {
-		navigator.clipboard.writeText(outputValue).then(() => {
-		});
+		navigator.clipboard.writeText(outputValue).then(() => {});
 	}
 </script>
 
@@ -24,13 +23,13 @@
 	<textarea
 		bind:value={inputValue}
 		placeholder={inputPlaceholder}
-        class="w-[600px] h-72 mb-4 max-w-md rounded border border-gray-300 p-2 text-left overflow-auto"
+		class="mb-4 h-72 w-[600px] max-w-md overflow-auto rounded border border-gray-300 p-2 text-left"
 	/>
 	<button on:click={handleClick} class="rounded bg-blue-500 p-2 text-white hover:bg-blue-700">
 		{buttonText}
 	</button>
 
-	<div class="w-[600px] h-72 mt-4 max-w-md rounded border border-gray-300 p-2">
+	<div class="mt-4 h-72 w-[600px] max-w-md rounded border border-gray-300 p-2">
 		<p class="break-words">{outputValue}</p>
 	</div>
 	<button
