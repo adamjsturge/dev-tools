@@ -39,10 +39,3 @@
 		Copy Output
 	</button>
 </div>
-
-<style>
-	.fixed-size {
-		width: 600px;
-		height: 250px;
-	}
-</style>
