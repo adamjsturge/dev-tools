@@ -21,17 +21,16 @@
 
 <div class="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
 	<h1 class="mb-4 text-2xl font-bold">{title}</h1>
-	<input
-		type="text"
+	<textarea
 		bind:value={inputValue}
 		placeholder={inputPlaceholder}
-        class="fixed-size mb-4 w-full max-w-md rounded border border-gray-300 p-2 text-left h-auto overflow-auto"
+        class="w-[600px] h-72 mb-4 max-w-md rounded border border-gray-300 p-2 text-left overflow-auto"
 	/>
 	<button on:click={handleClick} class="rounded bg-blue-500 p-2 text-white hover:bg-blue-700">
 		{buttonText}
 	</button>
 
-	<div class="fixed-size mt-4 w-full max-w-md rounded border border-gray-300 p-2">
+	<div class="w-[600px] h-72 mt-4 max-w-md rounded border border-gray-300 p-2">
 		<p class="break-words">{outputValue}</p>
 	</div>
 	<button
