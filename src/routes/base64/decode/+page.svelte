@@ -1,5 +1,5 @@
 <script>
-	import Base64Layout from '../Base64Layout.svelte';
+	import Base64Layout from '$lib/IOwithCopy.svelte';
 
 	/**
 	 * @param {string} input
