@@ -14,6 +14,7 @@
 		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
+		"@catppuccin/tailwindcss": "0.1.6",
 		"@playwright/test": "^1.45.3",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^4.7.3",

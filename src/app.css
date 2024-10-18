@@ -3,6 +3,5 @@
 @import 'tailwindcss/utilities';
 
 body {
-    @apply bg-mocha-base text-mocha-text;
-  }
-
+  @apply bg-ctp-base
+}
