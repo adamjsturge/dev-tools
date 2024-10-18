@@ -5,3 +5,19 @@
 body {
   @apply bg-ctp-base
 }
+
+p {
+  @apply text-ctp-text
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-ctp-text;
+}
+
+textarea {
+  @apply bg-ctp-base text-ctp-text border-ctp-text;
+}
+
+button {
+  @apply bg-ctp-subtext0 text-ctp-crust;
+}

@@ -31,17 +31,15 @@
 		placeholder="Enter URL"
 		class="mb-4 w-72 rounded border p-2"
 	/>
-	<button on:click={generateQRCode} class="cursor-pointer rounded bg-blue-500 p-2 text-white"
-		>Generate QR Code</button
-	>
+	<button on:click={generateQRCode} class="cursor-pointer rounded p-2">Generate QR Code</button>
 	{#if qrCodeDataUrl}
 		<img
 			src={qrCodeDataUrl}
 			alt="QR Code"
-			class="mt-4 size-[600px] border border-black"
+			class="mt-4 size-[600px] border border-ctp-text"
 			style="width: 200px; height: 200px;"
 		/>
-		<button on:click={saveQRCode} class="mt-4 cursor-pointer rounded bg-green-500 p-2 text-white"
+		<button on:click={saveQRCode} class="mt-4 cursor-pointer rounded bg-ctp-green p-2 text-white"
 			>Save QR Code</button
 		>
 	{/if}

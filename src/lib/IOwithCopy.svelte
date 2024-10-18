@@ -23,19 +23,14 @@
 	<textarea
 		bind:value={inputValue}
 		placeholder={inputPlaceholder}
-		class="mb-2 h-72 w-[600px] max-w-md overflow-auto rounded border border-gray-300 p-2 text-left bg-mocha-base"
+		class="mb-2 h-72 w-[600px] max-w-md overflow-auto rounded border p-2 text-left"
 	/>
-	<button on:click={handleClick} class="rounded p-2 text-mocha-crust bg-mocha-red hover:bg-mocha-maroon">
+	<button on:click={handleClick} class="rounded p-2">
 		{buttonText}
 	</button>
 
-	<div class="mt-4 h-72 w-[600px] max-w-md rounded border border-gray-300 p-2">
+	<div class="mt-4 h-72 w-[600px] max-w-md rounded border border-ctp-text p-2">
 		<p class="break-words">{outputValue}</p>
 	</div>
-	<button
-		on:click={copyToClipboard}
-		class="mt-2 rounded p-2 text-mocha-crust bg-mocha-red hover:bg-mocha-maroon"
-	>
-		Copy Output
-	</button>
+	<button on:click={copyToClipboard} class="mt-2 rounded p-2"> Copy Output </button>
 </div>
