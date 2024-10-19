@@ -1,12 +1,26 @@
 <script>
-	import '../app.css';
-	const variants = {
-		'latte': 'latte',
-		'cappuccino': 'cappuccino',
-		'macchiato': 'macchiato',
-		'mocha': 'mocha',
-	}
-	let selected = 'macchiato';
+	// import { onMount } from 'svelte';
+    import '../app.css';
+
+    // const variants = {
+    //     'latte': 'latte',
+    //     'cappuccino': 'cappuccino',
+    //     'macchiato': 'macchiato',
+    //     'mocha': 'mocha',
+    // }
+    // let selected = 'macchiato';
+
+    // onMount(() => {
+    //     if (typeof document !== 'undefined') {
+    //         document.body.classList.add(`ctp-${selected}`);
+    //     }
+    // });
+
+    // $: {
+    //     if (typeof document !== 'undefined') {
+    //         document.body.className = `ctp-${selected}`;
+    //     }
+    // }
 </script>
 
 <svelte:head>
