@@ -3,11 +3,11 @@
 @import 'tailwindcss/utilities';
 
 body {
-  @apply bg-ctp-base
+  @apply bg-ctp-base;
 }
 
 p {
-  @apply text-ctp-text
+  @apply text-ctp-text;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -20,4 +20,8 @@ textarea {
 
 button {
   @apply bg-ctp-subtext0 text-ctp-crust;
+}
+
+input {
+  @apply bg-ctp-base text-ctp-text border-ctp-text;
 }

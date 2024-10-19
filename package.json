@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@catppuccin/palette": "^1.4.0",
 		"qrcode": "^1.5.4"
 	}
 }

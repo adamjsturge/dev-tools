@@ -3,19 +3,19 @@
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 		<a
 			href="/base64/encode"
-			class="block rounded-lg bg-ctp-overlay0 p-6 text-center text-ctp-text shadow-md hover:bg-ctp-overlay1"
+			class="block rounded-lg bg-ctp-red p-6 text-center text-ctp-text shadow-md hover:bg-ctp-maroon font-bold"
 		>
 			Base64 Encode
 		</a>
 		<a
 			href="/base64/decode"
-			class="block rounded-lg bg-ctp-overlay0 p-6 text-center text-ctp-text shadow-md hover:bg-ctp-overlay1"
+			class="block rounded-lg bg-ctp-blue p-6 text-center text-ctp-text shadow-md hover:bg-ctp-sapphire font-bold"
 		>
 			Base64 Decode
 		</a>
 		<a
 			href="/qr-code"
-			class="block rounded-lg bg-ctp-overlay0 p-6 text-center text-ctp-text shadow-md hover:bg-ctp-overlay1"
+			class="block rounded-lg bg-ctp-mauve p-6 text-center text-ctp-text shadow-md hover:bg-ctp-pink font-bold"
 		>
 			QR Code
 		</a>
