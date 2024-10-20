@@ -43,9 +43,10 @@
 			"
 			name="colorscheme"
 		>
-			{#each Object.keys(variants) as variant}
-				<option value={variant}>{variant}</option>
-			{/each}
+			<option value="latte">latte</option>
+			<option value="cappuccino">cappuccino</option>
+			<option value="macchiato">macchiato</option>
+			<option value="mocha">mocha</option>
 		</select>
 	</div>
 	<div class="flex max-w-fit rounded ml-auto">
