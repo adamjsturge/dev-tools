@@ -3,9 +3,9 @@
     import '../app.css';
 
     /**
-	 * @type {string}
+	 * @type {string|null}
 	 */
-    let selected = 'macchiato'; //= localStorage.getItem('theme') || 
+    let selected = null; //= localStorage.getItem('theme') || 
 
     onMount(() => {
         if (typeof document !== 'undefined') {
@@ -16,7 +16,7 @@
     });
 
     $: {
-        if (typeof document !== 'undefined') {
+        if (selected !== null && typeof document !== 'undefined') {
             document.body.className = `ctp-${selected}`;
             localStorage.setItem('theme', selected);
         }
