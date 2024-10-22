@@ -2,12 +2,6 @@
 	import { onMount } from 'svelte';
     import '../app.css';
 
-    const variants = {
-        'latte': 'latte',
-        'cappuccino': 'cappuccino',
-        'macchiato': 'macchiato',
-        'mocha': 'mocha',
-    }
     let selected = 'macchiato';
 
     onMount(() => {
@@ -29,7 +23,7 @@
 <nav class="flex items-center justify-between bg-ctp-crust p-4 text-ctp-text">
 	<a href="/" class="font-bold">Home</a>
 	<!-- <a href="/qr-code" class="font-bold">QR Code</a> -->
-	<div class="flex max-w-fit border rounded border-ctp-overlay0 ml-auto">
+	<!-- <div class="flex max-w-fit border rounded border-ctp-overlay0 ml-auto">
 		<select
 			bind:value={selected}
 			class="
@@ -48,7 +42,7 @@
 			<option value="macchiato">macchiato</option>
 			<option value="mocha">mocha</option>
 		</select>
-	</div>
+	</div> -->
 	<div class="flex max-w-fit rounded ml-auto">
         <a href="https://github.com/adamjsturge/dev-tools" target="_blank" rel="noopener noreferrer" class="ml-4">
             <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
