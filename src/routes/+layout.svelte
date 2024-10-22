@@ -1,11 +1,16 @@
 <script>
-	import { onMount } from 'svelte';
+    import { onMount } from 'svelte';
     import '../app.css';
 
-    let selected = 'macchiato';
+    /**
+	 * @type {string}
+	 */
+    let selected = 'macchiato'; //= localStorage.getItem('theme') || 
 
     onMount(() => {
         if (typeof document !== 'undefined') {
+            selected = localStorage.getItem('theme') || 'macchiato';
+            localStorage.setItem('theme', selected);
             document.body.classList.add(`ctp-${selected}`);
         }
     });
@@ -13,6 +18,7 @@
     $: {
         if (typeof document !== 'undefined') {
             document.body.className = `ctp-${selected}`;
+            localStorage.setItem('theme', selected);
         }
     }
 </script>
