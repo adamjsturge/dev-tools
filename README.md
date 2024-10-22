@@ -1,18 +1,13 @@
-# create-svelte
+# Dev Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## To Add
+- [ ] Word Count
+- [ ] Word Density (to Word Count)
+- [ ] Regex (Big Project)
+- [ ] Offline Mode (Self Updating Electron App)
+- [ ] See what other dev things I want to add
+- [ ] Mermaid
+- [ ] Markdown
 
 ## Developing
 
