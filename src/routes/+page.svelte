@@ -19,5 +19,17 @@
 		>
 			QR Code
 		</a>
+		<a
+			href="/url/encode"
+			class="block rounded-lg bg-ctp-green p-6 text-center text-ctp-text shadow-md hover:bg-ctp-olive font-bold"
+			>
+			URL Encode
+		</a>
+		<a
+			href="/url/decode"
+			class="block rounded-lg bg-ctp-yellow p-6 text-center text-ctp-text shadow-md hover:bg-ctp-sunflower font-bold"
+			>
+			URL Decode
+		</a>
 	</div>
 </div>
