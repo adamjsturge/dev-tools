@@ -1,8 +1,8 @@
 <script>
 	import QRCode from 'qrcode';
 
-	let url = '';
-	let qrCodeDataUrl = '';
+	let url = $state('');
+	let qrCodeDataUrl = $state('');
 
 	const generateQRCode = async () => {
 		try {
@@ -31,7 +31,7 @@
 		placeholder="Enter URL"
 		class="mb-4 w-72 rounded border p-2"
 	/>
-	<button on:click={generateQRCode} class="cursor-pointer rounded p-2">Generate QR Code</button>
+	<button onclick={generateQRCode} class="cursor-pointer rounded p-2">Generate QR Code</button>
 	{#if qrCodeDataUrl}
 		<img
 			src={qrCodeDataUrl}
@@ -39,7 +39,7 @@
 			class="mt-4 size-[600px] border border-ctp-text"
 			style="width: 200px; height: 200px;"
 		/>
-		<button on:click={saveQRCode} class="mt-4 cursor-pointer rounded bg-ctp-green p-2 text-white"
+		<button onclick={saveQRCode} class="mt-4 cursor-pointer rounded bg-ctp-green p-2 text-white"
 			>Save QR Code</button
 		>
 	{/if}

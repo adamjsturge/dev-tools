@@ -1,11 +1,20 @@
 <script>
+	import { run } from 'svelte/legacy';
+
     import { onMount } from 'svelte';
     import '../app.css';
+	/**
+	 * @typedef {Object} Props
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { children } = $props();
 
     /**
 	 * @type {string|null}
 	 */
-    let selected = null; //= localStorage.getItem('theme') || 
+    let selected = $state(null); //= localStorage.getItem('theme') || 
 
     onMount(() => {
         if (typeof document !== 'undefined') {
@@ -15,12 +24,12 @@
         }
     });
 
-    $: {
+    run(() => {
         if (selected !== null && typeof document !== 'undefined') {
             document.body.className = `ctp-${selected}`;
             localStorage.setItem('theme', selected);
         }
-    }
+    });
 </script>
 
 <svelte:head>
@@ -59,4 +68,4 @@
 	
 </nav>
 
-<slot></slot>
+{@render children?.()}
