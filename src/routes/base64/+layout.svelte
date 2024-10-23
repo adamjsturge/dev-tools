@@ -1,5 +1,12 @@
 <script>
 	import { page } from '$app/stores';
+	/**
+	 * @typedef {Object} Props
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { children } = $props();
 </script>
 
 <nav class="bg-gray-800 p-4">
@@ -10,4 +17,4 @@
 	{/if}
 </nav>
 
-<slot></slot>
+{@render children?.()}

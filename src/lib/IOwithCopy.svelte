@@ -1,13 +1,22 @@
 <script>
-	export let title = '';
-	export let inputPlaceholder = '';
-	export let buttonText = '';
+	
 	/**
-	 * @type {(arg0: string) => string}
+	 * @typedef {Object} Props
+	 * @property {string} [title]
+	 * @property {string} [inputPlaceholder]
+	 * @property {string} [buttonText]
+	 * @property {(arg0: string) => string} onButtonClick
 	 */
-	export let onButtonClick;
-	let inputValue = '';
-	let outputValue = '';
+
+	/** @type {Props} */
+	let {
+		title = '',
+		inputPlaceholder = '',
+		buttonText = '',
+		onButtonClick
+	} = $props();
+	let inputValue = $state('');
+	let outputValue = $state('');
 
 	function handleClick() {
 		outputValue = onButtonClick(inputValue);
@@ -24,13 +33,13 @@
 		bind:value={inputValue}
 		placeholder={inputPlaceholder}
 		class="mb-2 h-72 w-[600px] max-w-md overflow-auto rounded border p-2 text-left"
-	/>
-	<button on:click={handleClick} class="rounded p-2">
+	></textarea>
+	<button onclick={handleClick} class="rounded p-2">
 		{buttonText}
 	</button>
 
 	<div class="mt-4 h-72 w-[600px] max-w-md rounded border border-ctp-text p-2">
 		<p class="break-words">{outputValue}</p>
 	</div>
-	<button on:click={copyToClipboard} class="mt-2 rounded p-2"> Copy Output </button>
+	<button onclick={copyToClipboard} class="mt-2 rounded p-2"> Copy Output </button>
 </div>
