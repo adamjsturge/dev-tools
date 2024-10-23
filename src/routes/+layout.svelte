@@ -14,7 +14,7 @@
     /**
 	 * @type {string|null}
 	 */
-    let selected = $state(null); //= localStorage.getItem('theme') || 
+    let selected = $state(null);
 
     onMount(() => {
         if (typeof document !== 'undefined') {
