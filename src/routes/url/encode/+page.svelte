@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>URL Encode - Dev Tools</title>
+</svelte:head>
+
 <script>
 	import IOwithCopy from '$lib/IOwithCopy.svelte';
 

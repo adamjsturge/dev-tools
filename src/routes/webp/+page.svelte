@@ -59,6 +59,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>WebP Converter - Dev Tools</title>
+</svelte:head>
+
 <div class="max-w-2xl mx-auto p-8">
     <h1 class="text-2xl font-bold text-ctp-text mb-6">WebP Converter</h1>
     

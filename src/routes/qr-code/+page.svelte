@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>QR Code Generator - Dev Tools</title>
+</svelte:head>
+
 <script>
 	import QRCode from 'qrcode';
 

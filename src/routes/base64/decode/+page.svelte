@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Base64 Decode - Dev Tools</title>
+</svelte:head>
+
 <script>
 	import Base64Layout from '$lib/IOwithCopy.svelte';
 

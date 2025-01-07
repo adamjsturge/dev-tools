@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Dev Tools</title>
+</svelte:head>
+
 <div class="ctp-container mx-auto p-4">
 	<h1 class="mb-4 text-2xl font-bold">Tools Menu</h1>
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
