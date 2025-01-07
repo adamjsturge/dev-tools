@@ -38,7 +38,7 @@
                 canvas.toBlob(
                     (blob) => resolve(blob!),
                     'image/webp',
-                    quality
+                    quality === 1 ? 1 - Number.EPSILON : quality // Bug with 1 making the size way too big
                 );
             });
 
