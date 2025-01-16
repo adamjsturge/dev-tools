@@ -41,5 +41,11 @@
 		>
 			WebP Converter
 		</a>
+		<a
+			href="/textbin"
+			class="block rounded-lg bg-ctp-surface0 p-6 text-center text-ctp-text shadow-md hover:bg-ctp-surface1 font-bold"
+		>
+			TextBin
+		</a>
 	</div>
 </div>
