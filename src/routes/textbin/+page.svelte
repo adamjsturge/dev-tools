@@ -4,20 +4,20 @@
 
 <script>
     import { onMount } from 'svelte';
+    import TextArea from '$lib/components/TextArea.svelte';
 
     let content = $state('');
-    /**
-	 * @type {HTMLTextAreaElement}
-	 */
-    let textareaElement;
     const STORAGE_KEY = 'text-bin-content';
+
+    /** @type {import('$lib/components/TextArea.svelte').default} */
+    let textArea;
 
     onMount(() => {
         const savedContent = localStorage.getItem(STORAGE_KEY);
         if (savedContent) {
             content = savedContent;
         }
-        textareaElement?.focus();
+        textArea?.focus();
     });
 
     /**
@@ -35,12 +35,11 @@
 
 <main class="flex h-screen flex-col items-center p-4">
     <h1 class="mb-4 text-2xl font-bold">Text Bin</h1>
-    <textarea
-        bind:this={textareaElement}
+    <TextArea
+        bind:this={textArea}
         bind:value={content}
-        oninput={handleInput}
-        class="h-[70vh] w-[90%] resize rounded border border-ctp-surface0 bg-ctp-surface0 p-4 font-mono focus:outline-none"
-        placeholder="Start typing..."
-    >
-    </textarea>
+        on:input={handleInput}
+        customClass="h-[70vh] w-[90%]"
+        autofocus
+    />
 </main>
