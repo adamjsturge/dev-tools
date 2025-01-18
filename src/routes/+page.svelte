@@ -28,7 +28,8 @@
 		{ href: "/url/decode", title: "URL Decode", meta: "decode,url,tool" },
 		{ href: "/webp", title: "WebP Converter", meta: "webp,convert,tool" },
 		{ href: "/textbin", title: "TextBin", meta: "text,bin,tool" },
-		{ href: "/word-counter", title: "Word Counter", meta: "word,count,tool" }
+		{ href: "/word-counter", title: "Word Counter", meta: "word,count,tool" },
+		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" }
 	];
 
 	/** @type {string} */
