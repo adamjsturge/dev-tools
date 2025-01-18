@@ -33,35 +33,49 @@
      */
     async function downloadAll() {
         try {
-            // Check if File System Access API is supported
             if (!('showDirectoryPicker' in window)) {
-                alert('Your browser doesn\'t support folder downloads. Please download files individually.');
+                alert('Your browser doesn\'t support folder downloads. Files will download individually.');
+                // Fall back to individual downloads
+                for (const file of extractedFiles) {
+                    downloadFile(file.name, file.content);
+                }
                 return;
             }
 
-            const dirHandle = await window.showDirectoryPicker();
-            
+            const rootHandle = await window.showDirectoryPicker();
+            const processedFolders = new Map();
+
             for (const file of extractedFiles) {
                 const pathParts = file.name.split('/');
-                let currentHandle = dirHandle;
+                const fileName = pathParts.pop(); // Get the file name
+                let currentHandle = rootHandle;
 
-                // Create folder structure
-                for (let i = 0; i < pathParts.length - 1; i++) {
-                    const folderName = pathParts[i];
-                    if (folderName) {
-                        currentHandle = await currentHandle.getDirectoryHandle(folderName, { create: true });
+                // Build the folder path
+                for (const folder of pathParts) {
+                    if (!folder) continue;
+                    
+                    const folderPath = pathParts.slice(0, pathParts.indexOf(folder) + 1).join('/');
+                    if (!processedFolders.has(folderPath)) {
+                        currentHandle = await currentHandle.getDirectoryHandle(folder, { create: true });
+                        processedFolders.set(folderPath, currentHandle);
+                    } else {
+                        currentHandle = processedFolders.get(folderPath);
                     }
                 }
 
-                // Create and write the file
-                const fileName = pathParts[pathParts.length - 1];
+                // Write the file
                 const fileHandle = await currentHandle.getFileHandle(fileName, { create: true });
                 const writable = await fileHandle.createWritable();
                 await writable.write(file.content);
                 await writable.close();
             }
+
+            alert('Files downloaded successfully!');
         } catch (error) {
             console.error('Error downloading files:', error);
+            if (error instanceof Error && error.name === 'AbortError') {
+                return; // User cancelled the folder picker
+            }
             alert('Failed to download files. Please try again.');
         }
     }
