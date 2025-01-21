@@ -1,4 +1,8 @@
 <script>
+    import Input from '$lib/components/Input.svelte';
+    import Tile from '$lib/components/Tile.svelte';
+    import Section from '$lib/components/Section.svelte';
+
     /**
      * Calculate hypergeometric probability
      * @param {number} N Population size (deck size)
@@ -120,127 +124,71 @@
 <main class="flex h-screen flex-col items-center p-4">
     <h1 class="mb-4 text-2xl font-bold">Deck Draw Odds Calculator</h1>
 
-    <div class="w-[90%] max-w-4xl">
-        <h2 class="text-xl font-bold mb-4">Single Card Probability Calculator</h2>
+    <Section title="Single Card Probability Calculator">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="flex flex-col">
-                <label class="mb-2" for="deckSize">Deck Size</label>
-                <input
-                    type="number"
-                    id="deckSize"
-                    bind:value={deckSize}
-                    min="1"
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="copiesRan">Copies Ran</label>
-                <input
-                    type="number"
-                    id="copiesRan"
-                    bind:value={copiesRan}
-                    min="1"
-                    max={deckSize}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="cardsDrawn">Cards Drawn</label>
-                <input
-                    type="number"
-                    id="cardsDrawn"
-                    bind:value={cardsDrawn}
-                    min="1"
-                    max={deckSize}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="oddsToHave">Odds to Have</label>
-                <input
-                    type="number"
-                    id="oddsToHave"
-                    bind:value={oddsToHave}
-                    min="1"
-                    max={Math.min(copiesRan, cardsDrawn)}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
+            <Input
+                id="deckSize"
+                label="Deck Size"
+                bind:value={deckSize}
+            />
+            <Input
+                id="copiesRan"
+                label="Copies Ran"
+                bind:value={copiesRan}
+                max={deckSize}
+            />
+            <Input
+                id="cardsDrawn"
+                label="Cards Drawn"
+                bind:value={cardsDrawn}
+                max={deckSize}
+            />
+            <Input
+                id="oddsToHave"
+                label="Odds to Have"
+                bind:value={oddsToHave}
+                max={Math.min(copiesRan, cardsDrawn)}
+            />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-ctp-surface0 p-4 rounded-lg">
-                <h3 class="font-bold mb-2">Exact Probability</h3>
-                <p>{(exactProbability * 100).toFixed(2)}%</p>
-            </div>
-            <div class="bg-ctp-surface0 p-4 rounded-lg">
-                <h3 class="font-bold mb-2">At Least Probability</h3>
-                <p>{(atLeastProbability * 100).toFixed(2)}%</p>
-            </div>
-            <div class="bg-ctp-surface0 p-4 rounded-lg">
-                <h3 class="font-bold mb-2">With One Mulligan</h3>
-                <p>{(mulliganProbability * 100).toFixed(2)}%</p>
-            </div>
+            <Tile title="Exact Probability" value={exactProbability} />
+            <Tile title="At Least Probability" value={atLeastProbability} />
+            <Tile title="With One Mulligan" value={mulliganProbability} />
         </div>
-    </div>
+    </Section>
 
-    <div class="w-[90%] max-w-4xl mt-8">
-        <h2 class="text-xl font-bold mb-4">Multi Card Probability Calculator</h2>
+    <Section title="Multi Card Probability Calculator" customClass="mt-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="flex flex-col">
-                <label class="mb-2" for="mvDeckSize">Deck Size</label>
-                <input
-                    type="number"
-                    id="mvDeckSize"
-                    bind:value={mvDeckSize}
-                    min="1"
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="copiesCardA">Copies of Card A</label>
-                <input
-                    type="number"
-                    id="copiesCardA"
-                    bind:value={copiesCardA}
-                    min="1"
-                    max={mvDeckSize}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="copiesCardB">Copies of Card B</label>
-                <input
-                    type="number"
-                    id="copiesCardB"
-                    bind:value={copiesCardB}
-                    min="1"
-                    max={mvDeckSize}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
-            <div class="flex flex-col">
-                <label class="mb-2" for="mvDrawSize">Draw Size</label>
-                <input
-                    type="number"
-                    id="mvDrawSize"
-                    bind:value={mvDrawSize}
-                    min="2"
-                    max={mvDeckSize}
-                    class="p-2 border rounded-lg"
-                />
-            </div>
+            <Input
+                id="mvDeckSize"
+                label="Deck Size"
+                bind:value={mvDeckSize}
+            />
+            <Input
+                id="copiesCardA"
+                label="Copies of Card A"
+                bind:value={copiesCardA}
+                max={mvDeckSize}
+            />
+            <Input
+                id="copiesCardB"
+                label="Copies of Card B"
+                bind:value={copiesCardB}
+                max={mvDeckSize}
+            />
+            <Input
+                id="mvDrawSize"
+                label="Draw Size"
+                bind:value={mvDrawSize}
+                min={2}
+                max={mvDeckSize}
+            />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-ctp-surface0 p-4 rounded-lg">
-                <h3 class="font-bold mb-2">Probability of Drawing Both</h3>
-                <p>{(mvProbability * 100).toFixed(2)}%</p>
-            </div>
-            <div class="bg-ctp-surface0 p-4 rounded-lg">
-                <h3 class="font-bold mb-2">With One Mulligan</h3>
-                <p>{(mvMulliganProbability * 100).toFixed(2)}%</p>
-            </div>
+            <Tile title="Probability of Drawing Both" value={mvProbability} />
+            <Tile title="With One Mulligan" value={mvMulliganProbability} />
         </div>
-    </div>
+    </Section>
 </main>
