@@ -29,7 +29,8 @@
 		{ href: "/webp", title: "WebP Converter", meta: "webp,convert,tool" },
 		{ href: "/textbin", title: "TextBin", meta: "text,bin,tool" },
 		{ href: "/word-counter", title: "Word Counter", meta: "word,count,tool" },
-		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" }
+		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" },
+		{ href: "/deck-draw-odds", title: "Deck Draw Odds", meta: "deck,cards,probability,odds,tool" },
 	];
 
 	/** @type {string} */
