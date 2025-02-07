@@ -171,10 +171,9 @@
     ];
 
     /**
-	 * @param {{ detail: any; }} event
+	 * @param {Object.<string, number>} updates
 	 */
-    function handlePresetUpdate(event) {
-        const updates = event.detail;
+    function handlePresetUpdate(updates) {
         for (const [key, value] of Object.entries(updates)) {
             if (key === 'deckSize') deckSize = value;
             if (key === 'mvDeckSize') mvDeckSize = value;
@@ -192,12 +191,12 @@
     <Section title="Single Card Probability Calculator">
         <div class="flex flex-col gap-4 mb-4">
             <div class="flex justify-between items-center">
-                <span class="text-sm font-medium">Game State:</span>
+                <!-- <span class="text-sm font-medium">Game State:</span> -->
                 <QuickBind
                     presets={gameStatePresets}
                     defaultValues={defaultValues.singleCard}
                     bindings={{ deckSize, mvDeckSize }}
-                    on:update={handlePresetUpdate}
+                    onUpdate={handlePresetUpdate}
                 />
             </div>
             <div class="flex justify-end">

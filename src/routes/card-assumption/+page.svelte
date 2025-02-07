@@ -112,10 +112,9 @@
     ];
 
     /**
-	 * @param {{ detail: any; }} event
+	 * @param {Object.<string, number>} updates
 	 */
-    function handlePresetUpdate(event) {
-        const updates = event.detail;
+    function handlePresetUpdate(updates) {
         for (const [key, value] of Object.entries(updates)) {
             if (key === 'deckSize') deckSize = value;
             if (key === 'relevantCards') relevantCards = value;
@@ -133,21 +132,21 @@
     <Section title="Calculate Opponent's Hand Probabilities">
         <div class="flex flex-col gap-4 mb-4">
             <div class="flex justify-between items-center">
-                <span class="text-sm font-medium">Game State:</span>
+                <!-- <span class="text-sm font-medium">Game State:</span> -->
                 <QuickBind
                     presets={gameStatePresets}
                     defaultValues={defaultValues}
                     bindings={{ deckSize }}
-                    on:update={handlePresetUpdate}
+                    onUpdate={handlePresetUpdate}
                 />
             </div>
             <div class="flex justify-between items-center">
-                <span class="text-sm font-medium">Relevant Cards:</span>
+                <!-- <span class="text-sm font-medium">Relevant Cards:</span> -->
                 <QuickBind
                     presets={relevantCardPresets}
                     defaultValues={defaultValues}
                     bindings={{ relevantCards }}
-                    on:update={handlePresetUpdate}
+                    onUpdate={handlePresetUpdate}
                 />
             </div>
             <div class="flex justify-end">

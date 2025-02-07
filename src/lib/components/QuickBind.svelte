@@ -1,7 +1,4 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
-
     /**
      * Array of preset configurations
      * @typedef {{label: string, values: Object.<string, number|function>}} Preset
@@ -22,10 +19,17 @@
     export let bindings;
 
     /**
+     * Event handler for preset updates
+     * @type {(updates: Object.<string, number>) => void}
+     */
+    export let onUpdate;
+
+    /**
      * Apply a preset configuration to the bindings
      * @param {Preset} preset The preset configuration to apply
      */
     function applyPreset(preset) {
+        /** @type {Object.<string, number>} */
         const updates = {};
         for (const [key, value] of Object.entries(preset.values)) {
             if (key in bindings) {
@@ -34,7 +38,8 @@
                     : value;
             }
         }
-        dispatch('update', updates);
+        /** @type {(updates: { [key: string]: number }) => void} */
+        onUpdate?.(updates);
     }
 </script>
 
