@@ -2,6 +2,7 @@
     import Input from '$lib/components/Input.svelte';
     import Tile from '$lib/components/Tile.svelte';
     import Section from '$lib/components/Section.svelte';
+    import QuickBind from '$lib/components/QuickBind.svelte';
 
     /**
      * Calculate hypergeometric probability
@@ -24,11 +25,27 @@
         return (combinations(K, k) * combinations(N - K, n - k)) / combinations(N, n);
     }
 
-    let deckSize = 50;
-    let relevantCards = 12;
-    let handSize = 5;
-    let discardedCards = 0;
-    let knownRelevantInHand = 0;
+    const defaultValues = {
+        deckSize: 50,
+        relevantCards: 12,
+        handSize: 5,
+        discardedCards: 0,
+        knownRelevantInHand: 0
+    };
+
+    function resetToDefault() {
+        deckSize = defaultValues.deckSize;
+        relevantCards = defaultValues.relevantCards;
+        handSize = defaultValues.handSize;
+        discardedCards = defaultValues.discardedCards;
+        knownRelevantInHand = defaultValues.knownRelevantInHand;
+    }
+
+    let deckSize = defaultValues.deckSize;
+    let relevantCards = defaultValues.relevantCards;
+    let handSize = defaultValues.handSize;
+    let discardedCards = defaultValues.discardedCards;
+    let knownRelevantInHand = defaultValues.knownRelevantInHand;
 
     $: adjustedDeckSize = deckSize - discardedCards;
     $: adjustedRelevantCards = relevantCards - discardedCards;
@@ -51,6 +68,59 @@
     });
 
     $: highestProbability = Math.max(...probabilities.map(p => p.probability));
+
+    const gameStatePresets = [
+        {
+            label: 'Start of Game',
+            values: {
+                deckSize: (/** @type {any} */ def) => def,
+            }
+        },
+        {
+            label: 'First Turn',
+            values: {
+                deckSize: (/** @type {number} */ def) => def - 10,
+            }
+        },
+        {
+            label: 'Late Game',
+            values: {
+                deckSize: (/** @type {number} */ def) => def - 16,
+            }
+        }
+    ];
+
+    const relevantCardPresets = [
+        {
+            label: 'Standard 2ks',
+            values: {
+                relevantCards: 12
+            }
+        },
+        {
+            label: 'Low 2ks',
+            values: {
+                relevantCards: 8
+            }
+        },
+        {
+            label: 'High 2ks',
+            values: {
+                relevantCards: 16
+            }
+        }
+    ];
+
+    /**
+	 * @param {{ detail: any; }} event
+	 */
+    function handlePresetUpdate(event) {
+        const updates = event.detail;
+        for (const [key, value] of Object.entries(updates)) {
+            if (key === 'deckSize') deckSize = value;
+            if (key === 'relevantCards') relevantCards = value;
+        }
+    }
 </script>
 
 <svelte:head>
@@ -61,6 +131,35 @@
     <h1 class="mb-4 text-2xl font-bold">Card Assumption Calculator</h1>
 
     <Section title="Calculate Opponent's Hand Probabilities">
+        <div class="flex flex-col gap-4 mb-4">
+            <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">Game State:</span>
+                <QuickBind
+                    presets={gameStatePresets}
+                    defaultValues={defaultValues}
+                    bindings={{ deckSize }}
+                    on:update={handlePresetUpdate}
+                />
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">Relevant Cards:</span>
+                <QuickBind
+                    presets={relevantCardPresets}
+                    defaultValues={defaultValues}
+                    bindings={{ relevantCards }}
+                    on:update={handlePresetUpdate}
+                />
+            </div>
+            <div class="flex justify-end">
+                <button
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    on:click={resetToDefault}
+                >
+                    Reset to Default
+                </button>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <Input
                 id="deckSize"

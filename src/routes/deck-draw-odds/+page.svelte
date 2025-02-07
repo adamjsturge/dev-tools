@@ -2,6 +2,7 @@
     import Input from '$lib/components/Input.svelte';
     import Tile from '$lib/components/Tile.svelte';
     import Section from '$lib/components/Section.svelte';
+    import QuickBind from '$lib/components/QuickBind.svelte';
 
     /**
      * Calculate hypergeometric probability
@@ -52,6 +53,35 @@
         const firstTry = atLeast(N, K, n, minimum);
         const secondTry = atLeast(N, K, n, minimum);
         return firstTry + (1 - firstTry) * secondTry;
+    }
+
+    const defaultValues = {
+        singleCard: {
+            deckSize: 50,
+            copiesRan: 4,
+            cardsDrawn: 5,
+            oddsToHave: 1
+        },
+        multiCard: {
+            deckSize: 50,
+            copiesCardA: 4,
+            copiesCardB: 4,
+            drawSize: 5
+        }
+    };
+
+    function resetSingleCard() {
+        deckSize = defaultValues.singleCard.deckSize;
+        copiesRan = defaultValues.singleCard.copiesRan;
+        cardsDrawn = defaultValues.singleCard.cardsDrawn;
+        oddsToHave = defaultValues.singleCard.oddsToHave;
+    }
+
+    function resetMultiCard() {
+        mvDeckSize = defaultValues.multiCard.deckSize;
+        copiesCardA = defaultValues.multiCard.copiesCardA;
+        copiesCardB = defaultValues.multiCard.copiesCardB;
+        mvDrawSize = defaultValues.multiCard.drawSize;
     }
 
     let deckSize = 50;
@@ -115,6 +145,41 @@
 
     $: mvProbability = calculateMultivariateIntersect(mvDeckSize, copiesCardA, copiesCardB, mvDrawSize);
     $: mvMulliganProbability = calculateMultivariateMulligan(mvDeckSize, copiesCardA, copiesCardB, mvDrawSize);
+
+    const gameStatePresets = [
+        {
+            label: 'Start of Game',
+            values: {
+                deckSize: (/** @type {any} */ def) => def,
+                mvDeckSize: (/** @type {any} */ def) => def
+            }
+        },
+        {
+            label: 'First Turn',
+            values: {
+                deckSize: (/** @type {number} */ def) => def - 10,
+                mvDeckSize: (/** @type {number} */ def) => def - 10
+            }
+        },
+        {
+            label: 'Late Game',
+            values: {
+                deckSize: (/** @type {number} */ def) => def - 16,
+                mvDeckSize: (/** @type {number} */ def) => def - 16
+            }
+        }
+    ];
+
+    /**
+	 * @param {{ detail: any; }} event
+	 */
+    function handlePresetUpdate(event) {
+        const updates = event.detail;
+        for (const [key, value] of Object.entries(updates)) {
+            if (key === 'deckSize') deckSize = value;
+            if (key === 'mvDeckSize') mvDeckSize = value;
+        }
+    }
 </script>
 
 <svelte:head>
@@ -125,6 +190,26 @@
     <h1 class="mb-4 text-2xl font-bold">Deck Draw Odds Calculator</h1>
 
     <Section title="Single Card Probability Calculator">
+        <div class="flex flex-col gap-4 mb-4">
+            <div class="flex justify-between items-center">
+                <span class="text-sm font-medium">Game State:</span>
+                <QuickBind
+                    presets={gameStatePresets}
+                    defaultValues={defaultValues.singleCard}
+                    bindings={{ deckSize, mvDeckSize }}
+                    on:update={handlePresetUpdate}
+                />
+            </div>
+            <div class="flex justify-end">
+                <button
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    on:click={resetSingleCard}
+                >
+                    Reset to Default
+                </button>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <Input
                 id="deckSize"
@@ -159,6 +244,15 @@
     </Section>
 
     <Section title="Multi Card Probability Calculator" customClass="mt-8">
+        <div class="flex justify-end mb-4">
+            <button
+                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                on:click={resetMultiCard}
+            >
+                Reset to Default
+            </button>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <Input
                 id="mvDeckSize"
