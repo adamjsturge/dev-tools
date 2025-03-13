@@ -170,6 +170,31 @@
         }
     ];
 
+    // Add draw size presets
+    const drawSizePresets = [
+        {
+            label: 'Cards Drawn 3',
+            values: {
+                cardsDrawn: () => 3,
+                mvDrawSize: () => 3
+            }
+        },
+        {
+            label: 'Cards Drawn 4',
+            values: {
+                cardsDrawn: () => 4,
+                mvDrawSize: () => 4
+            }
+        },
+        {
+            label: 'Cards Drawn 5',
+            values: {
+                cardsDrawn: () => 5,
+                mvDrawSize: () => 5
+            }
+        }
+    ];
+
     /**
 	 * @param {Object.<string, number>} updates
 	 */
@@ -177,6 +202,8 @@
         for (const [key, value] of Object.entries(updates)) {
             if (key === 'deckSize') deckSize = value;
             if (key === 'mvDeckSize') mvDeckSize = value;
+            if (key === 'cardsDrawn') cardsDrawn = value;
+            if (key === 'mvDrawSize') mvDrawSize = value;
         }
     }
 </script>
@@ -196,6 +223,12 @@
                     presets={gameStatePresets}
                     defaultValues={defaultValues.singleCard}
                     bindings={{ deckSize, mvDeckSize }}
+                    onUpdate={handlePresetUpdate}
+                />
+                <QuickBind
+                    presets={drawSizePresets}
+                    defaultValues={defaultValues.singleCard}
+                    bindings={{ cardsDrawn, mvDrawSize }}
                     onUpdate={handlePresetUpdate}
                 />
             </div>
