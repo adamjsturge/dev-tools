@@ -1,7 +1,8 @@
 # Dev Tools
 
 ## To Add
-- [ ] Word Count
+
+- [x] Word Count
 - [ ] Word Density (to Word Count)
 - [ ] Regex (Big Project)
 - [ ] Offline Mode (Self Updating Electron App)

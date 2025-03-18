@@ -32,6 +32,7 @@
 		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" },
 		{ href: "/deck-draw-odds", title: "Deck Draw Odds", meta: "deck,cards,probability,odds,tool" },
 		{ href: "/card-assumption", title: "Card Assumption", meta: "cards,probability,assumption,tool" },
+		{ href: "/markdown-editor", title: "Markdown Editor", meta: "markdown,editor,md,tool" },
 	];
 
 	/** @type {string} */
