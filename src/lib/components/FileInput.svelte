@@ -1,15 +1,16 @@
 <script lang="ts">
-    export let files: FileList | undefined;
+    export let files: FileList;
+    export let accept = "image/*";  // Default to only images
 </script>
 
-<div class="w-full">
-    <input 
-        type="file" 
-        accept="image/*" 
-        multiple 
+<div class="flex flex-col gap-2">
+    <label for="files" class="text-sm font-medium">Select Files</label>
+    <input
+        type="file"
+        id="files"
+        {accept}
+        multiple
         bind:files
-        class="w-full p-2 border border-ctp-surface2 rounded-lg file:mr-4 file:py-2 file:px-4
-               file:rounded-lg file:border-0 file:bg-ctp-surface0 file:text-ctp-text
-               hover:file:bg-ctp-surface1"
-    >
+        class="p-2 rounded-lg bg-ctp-surface0 border border-ctp-overlay0"
+    />
 </div>
