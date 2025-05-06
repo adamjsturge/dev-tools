@@ -33,6 +33,7 @@
 		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" },
 		{ href: "/deck-draw-odds", title: "Deck Draw Odds", meta: "deck,cards,probability,odds,tool" },
 		{ href: "/card-assumption", title: "Card Assumption", meta: "cards,probability,assumption,tool" },
+		{ href: "/gif", title: "GIF Maker", meta: "gif,convert,animation,tool" },
 	];
 
 	/** @type {string} */
