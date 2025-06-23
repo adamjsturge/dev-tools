@@ -33,6 +33,7 @@
 		{ href: "/unzip", title: "Unzip Files", meta: "unzip,extract,zip,tool" },
 		{ href: "/deck-draw-odds", title: "Deck Draw Odds", meta: "deck,cards,probability,odds,tool" },
 		{ href: "/card-assumption", title: "Card Assumption", meta: "cards,probability,assumption,tool" },
+		{ href: "/sim-code-converter", title: "Sim Code Converter", meta: "sim,code,convert,tool" },
 	];
 
 	/** @type {string} */
