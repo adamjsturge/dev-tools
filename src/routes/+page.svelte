@@ -34,6 +34,7 @@
 		{ href: "/deck-draw-odds", title: "Deck Draw Odds", meta: "deck,cards,probability,odds,tool" },
 		{ href: "/card-assumption", title: "Card Assumption", meta: "cards,probability,assumption,tool" },
 		{ href: "/sim-code-converter", title: "Sim Code Converter", meta: "sim,code,convert,tool" },
+		{ href: "/compare", title: "Text Compare", meta: "text,compare,diff,tool" },
 	];
 
 	/** @type {string} */
