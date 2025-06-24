@@ -56,11 +56,31 @@
     }
 
     /**
-     * Format minutes into human-readable time
+     * Format minutes into human-readable time with better accessibility
      * @param {number} minutes
      * @returns {string}
      */
     function formatTime(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = Math.round(minutes % 60);
+        
+        if (hours === 0) {
+            return mins === 1 ? '1 minute' : `${mins} minutes`;
+        } else if (mins === 0) {
+            return hours === 1 ? '1 hour' : `${hours} hours`;
+        } else {
+            const hourText = hours === 1 ? '1 hour' : `${hours} hours`;
+            const minText = mins === 1 ? '1 minute' : `${mins} minutes`;
+            return `${hourText} and ${minText}`;
+        }
+    }
+
+    /**
+     * Format time in short format for display
+     * @param {number} minutes
+     * @returns {string}
+     */
+    function formatTimeShort(minutes) {
         const hours = Math.floor(minutes / 60);
         const mins = Math.round(minutes % 60);
         if (hours === 0) return `${mins}m`;
@@ -85,16 +105,12 @@
         const data = [];
         const totalMinutes = estimatedMinutes;
         
-        // Generate realistic charging curve (fast at start, slower near end)
+        // Generate linear charging curve for slow charging
         for (let i = 0; i <= 100; i++) {
             const progress = i / 100;
             
-            // Use a logarithmic curve that starts fast and slows down
-            const timeProgress = progress < 0.8 ? 
-                progress * 0.7 : // First 80% of progress takes 70% of time
-                0.7 + (progress - 0.8) * 1.5; // Last 20% takes 30% of time
-            
-            const minutes = timeProgress * totalMinutes;
+            // Linear progression - no curve, constant charging rate
+            const minutes = progress * totalMinutes;
             const charge = currentCharge + (chargeRange * progress);
             const actualTime = addMinutesToTime(startTime, minutes);
             
@@ -197,7 +213,7 @@
         for (let i = 0; i <= 6; i++) {
             const x = padding + (i / 6) * chartWidth;
             const minutes = (i / 6) * estimatedMinutes;
-            const timeLabel = formatTime(minutes);
+            const timeLabel = formatTimeShort(minutes);
             const actualTime = addMinutesToTime(startTime, minutes);
             
             lines.push({
@@ -271,6 +287,13 @@
 <main class="flex h-screen flex-col p-4 max-w-6xl mx-auto">
     <h1 class="mb-6 text-3xl font-bold text-center">⚡ EV Charging Estimator</h1>
     
+    <div class="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
+        <p class="text-blue-800 dark:text-blue-200">
+            <strong>Slow Charging Model:</strong> This estimator assumes linear charging throughout the entire process.
+            Unlike fast charging which typically slows down at 80%, slow charging (Level 1/2) maintains a consistent rate.
+        </p>
+    </div>
+    
     {#if !showResults}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <Section title="Battery Information">
@@ -301,7 +324,7 @@
                     placeholder="45"
                     oninput={handleEstimatedMinutesInput}
                 />
-                <p class="text-sm text-gray-600 mt-2">
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                     Time your car estimates to reach target charge
                 </p>
             </Section>
@@ -322,7 +345,7 @@
                         Now
                     </button>
                 </div>
-                <p class="text-sm text-gray-600 mt-2">
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                     Set to see actual completion times
                 </p>
             </Section>
@@ -345,10 +368,14 @@
     {:else}
         <div class="flex-1 flex flex-col">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">
-                    Charging from {currentCharge}% to {targetCharge}% 
-                    ({formatTime(estimatedMinutes)})
-                </h2>
+                <div>
+                    <h2 class="text-xl font-semibold">
+                        Charging from {currentCharge}% to {targetCharge}% 
+                    </h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" aria-label="Total charging time: {formatTime(estimatedMinutes)}">
+                        Duration: {formatTime(estimatedMinutes)}
+                    </p>
+                </div>
                 <button
                     class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
                     onclick={() => showResults = false}
@@ -357,14 +384,14 @@
                 </button>
             </div>
 
-            <div class="bg-white rounded-lg shadow-lg p-6 flex-1">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex-1">
                 <div class="relative">
                     <svg
                         width="600"
                         height="400"
-                        class="border rounded-lg bg-gray-50"
+                        class="border rounded-lg bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600"
                         role="img"
-                        aria-label="EV charging curve from {currentCharge}% to {targetCharge}%"
+                        aria-label="EV charging curve showing linear progression from {currentCharge}% to {targetCharge}% over {formatTime(estimatedMinutes)}"
                         onmousemove={handleMouseMove}
                         onmouseleave={() => hoverInfo = { time: 0, charge: 0, actualTime: '' }}
                     >
@@ -375,13 +402,13 @@
                                 y1={line.y1}
                                 x2={line.x2}
                                 y2={line.y2}
-                                stroke="#e5e7eb"
+                                class="stroke-gray-300 dark:stroke-gray-500"
                                 stroke-width="1"
                             />
                             <text
                                 x={line.labelX}
                                 y={line.labelY}
-                                fill="#6b7280"
+                                class="fill-gray-600 dark:fill-gray-400"
                                 font-size="12"
                                 text-anchor={line.type === 'horizontal' ? 'end' : 'middle'}
                             >
@@ -391,7 +418,7 @@
                                 <text
                                     x={line.labelX}
                                     y={line.labelY + 15}
-                                    fill="#6b7280"
+                                    class="fill-gray-500 dark:fill-gray-500"
                                     font-size="10"
                                     text-anchor="middle"
                                 >
@@ -404,19 +431,19 @@
                         <path
                             d={getChargingPath()}
                             fill="none"
-                            stroke="#10b981"
+                            class="stroke-green-500 dark:stroke-green-400"
                             stroke-width="3"
                             stroke-linecap="round"
                         />
 
                         <!-- Current and target markers -->
-                        <circle cx="60" cy={340 - ((currentCharge - currentCharge) / chargeRange) * 280} r="6" fill="#ef4444" />
-                        <circle cx="540" cy={340 - (chargeRange / chargeRange) * 280} r="6" fill="#10b981" />
+                        <circle cx="60" cy={340 - ((currentCharge - currentCharge) / chargeRange) * 280} r="6" class="fill-red-500 dark:fill-red-400" />
+                        <circle cx="540" cy={340 - (chargeRange / chargeRange) * 280} r="6" class="fill-green-500 dark:fill-green-400" />
                     </svg>
 
                     <!-- Hover tooltip -->
                     {#if hoverInfo.charge > 0}
-                        <div class="absolute top-4 right-4 bg-black text-white p-3 rounded-lg text-sm">
+                        <div class="absolute top-4 right-4 bg-black dark:bg-gray-900 text-white p-3 rounded-lg text-sm shadow-lg">
                             <div><strong>{Math.round(hoverInfo.charge)}%</strong> charge</div>
                             <div>After {formatTime(hoverInfo.time)}</div>
                             {#if hoverInfo.actualTime && startTime}
@@ -429,40 +456,45 @@
                 <!-- Legend -->
                 <div class="mt-4 flex justify-center gap-6 text-sm">
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-red-500 rounded-full"></div>
-                        <span>Start ({currentCharge}%)</span>
+                        <div class="w-4 h-4 bg-red-500 dark:bg-red-400 rounded-full"></div>
+                        <span class="text-gray-700 dark:text-gray-300">Start ({currentCharge}%)</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-1 bg-green-500"></div>
-                        <span>Charging Progress</span>
+                        <div class="w-4 h-1 bg-green-500 dark:bg-green-400"></div>
+                        <span class="text-gray-700 dark:text-gray-300">Linear Charging Progress</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                        <span>Target ({targetCharge}%)</span>
+                        <div class="w-4 h-4 bg-green-500 dark:bg-green-400 rounded-full"></div>
+                        <span class="text-gray-700 dark:text-gray-300">Target ({targetCharge}%)</span>
                     </div>
                 </div>
 
                 <!-- Summary stats -->
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-blue-600">{chargeRange}%</div>
-                        <div class="text-gray-600">Charge Added</div>
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{chargeRange}%</div>
+                        <div class="text-gray-600 dark:text-gray-400">Charge Added</div>
                     </div>
-                    <div class="bg-green-50 p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600">{formatTime(estimatedMinutes)}</div>
-                        <div class="text-gray-600">Total Time</div>
+                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600 dark:text-green-400" aria-label="Total time: {formatTime(estimatedMinutes)}">
+                            {formatTimeShort(estimatedMinutes)}
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-400">Total Time</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                            {formatTime(estimatedMinutes)}
+                        </div>
                     </div>
                     {#if startTime}
-                        <div class="bg-purple-50 p-4 rounded-lg">
-                            <div class="text-2xl font-bold text-purple-600">
+                        <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">
                                 {addMinutesToTime(startTime, estimatedMinutes)}
                             </div>
-                            <div class="text-gray-600">Completion Time</div>
+                            <div class="text-gray-600 dark:text-gray-400">Completion Time</div>
                         </div>
                     {:else}
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="text-lg text-gray-500">Set start time</div>
-                            <div class="text-gray-600">for completion time</div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                            <div class="text-lg text-gray-500 dark:text-gray-400">Set start time</div>
+                            <div class="text-gray-600 dark:text-gray-500">for completion time</div>
                         </div>
                     {/if}
                 </div>
