@@ -101,6 +101,19 @@
         return date.toTimeString().slice(0, 5);
     }
 
+    /**
+     * Convert 24-hour time to 12-hour AM/PM format
+     * @param {string} timeStr - Time in HH:MM format
+     * @returns {string}
+     */
+    function formatTimeAmPm(timeStr) {
+        if (!timeStr) return '';
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        const period = hours >= 12 ? 'PM' : 'AM';
+        const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+        return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
+
     function generateChargingCurve() {
         const data = [];
         const totalMinutes = estimatedMinutes;
@@ -346,7 +359,7 @@
                     </button>
                 </div>
                 <p class="text-sm text-ctp-subtext1 mt-2">
-                    Set to see actual completion times
+                    Set to see actual completion times (times will display in AM/PM format)
                 </p>
             </Section>
         </div>
@@ -415,15 +428,15 @@
                                 {line.label}
                             </text>
                             {#if line.actualTime && startTime}
-                                <text
-                                    x={line.labelX}
-                                    y={line.labelY + 15}
-                                    class="fill-ctp-subtext1"
-                                    font-size="10"
-                                    text-anchor="middle"
-                                >
-                                    {line.actualTime}
-                                </text>
+                                                            <text
+                                x={line.labelX}
+                                y={line.labelY + 15}
+                                class="fill-ctp-subtext1"
+                                font-size="10"
+                                text-anchor="middle"
+                            >
+                                {formatTimeAmPm(line.actualTime)}
+                            </text>
                             {/if}
                         {/each}
 
@@ -447,7 +460,7 @@
                             <div><strong>{Math.round(hoverInfo.charge)}%</strong> charge</div>
                             <div>After {formatTime(hoverInfo.time)}</div>
                             {#if hoverInfo.actualTime && startTime}
-                                <div>At {hoverInfo.actualTime}</div>
+                                <div>At {formatTimeAmPm(hoverInfo.actualTime)}</div>
                             {/if}
                         </div>
                     {/if}
@@ -487,7 +500,7 @@
                     {#if startTime}
                         <div class="bg-ctp-mauve/20 p-4 rounded-lg border border-ctp-mauve/30">
                             <div class="text-2xl font-bold text-ctp-mauve">
-                                {addMinutesToTime(startTime, estimatedMinutes)}
+                                {formatTimeAmPm(addMinutesToTime(startTime, estimatedMinutes))}
                             </div>
                             <div class="text-ctp-subtext0">Completion Time</div>
                         </div>
