@@ -35,6 +35,7 @@
 		{ href: "/card-assumption", title: "Card Assumption", meta: "cards,probability,assumption,tool" },
 		{ href: "/sim-code-converter", title: "Sim Code Converter", meta: "sim,code,convert,tool" },
 		{ href: "/compare", title: "Text Compare", meta: "text,compare,diff,tool" },
+		{ href: "/ev-charging", title: "EV Charging", meta: "ev,charging,tool" },
 	];
 
 	/** @type {string} */

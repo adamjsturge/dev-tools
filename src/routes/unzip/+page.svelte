@@ -103,7 +103,7 @@
                     Extracted Files ({extractedFiles.length})
                 </h2>
                 <button
-                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                    class="bg-ctp-green text-ctp-base px-4 py-2 rounded hover:bg-ctp-teal transition-colors focus:outline-none focus:ring-2 focus:ring-ctp-green focus:ring-offset-2"
                     on:click={downloadAll}
                     aria-label="Download all files"
                 >
@@ -113,12 +113,12 @@
             <div class="grid gap-4" role="list">
                 {#each extractedFiles as file}
                     <div 
-                        class="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                        class="flex items-center justify-between p-4 bg-ctp-surface0 rounded-lg"
                         role="listitem"
                     >
                         <span class="truncate" title={file.name}>{file.name}</span>
                         <button
-                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            class="bg-ctp-blue text-ctp-base px-4 py-2 rounded hover:bg-ctp-sapphire transition-colors focus:outline-none focus:ring-2 focus:ring-ctp-blue focus:ring-offset-2"
                             on:click={() => downloadFile(file.name, file.content)}
                             aria-label="Download {file.name}"
                         >

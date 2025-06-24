@@ -225,6 +225,9 @@
                     bindings={{ deckSize, mvDeckSize }}
                     onUpdate={handlePresetUpdate}
                 />
+            </div>
+            <div class="flex justify-between items-center">
+                <!-- <span class="text-sm font-medium">Cards Drawn:</span> -->
                 <QuickBind
                     presets={drawSizePresets}
                     defaultValues={defaultValues.singleCard}
@@ -234,10 +237,10 @@
             </div>
             <div class="flex justify-end">
                 <button
-                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    class="px-4 py-2 text-sm font-medium text-ctp-base bg-ctp-blue rounded-md hover:bg-ctp-sapphire"
                     on:click={resetSingleCard}
                 >
-                    Reset to Default
+                    Reset Single Card
                 </button>
             </div>
         </div>
@@ -278,10 +281,10 @@
     <Section title="Multi Card Probability Calculator" customClass="mt-8">
         <div class="flex justify-end mb-4">
             <button
-                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                class="px-4 py-2 text-sm font-medium text-ctp-base bg-ctp-blue rounded-md hover:bg-ctp-sapphire"
                 on:click={resetMultiCard}
             >
-                Reset to Default
+                Reset Multi Card
             </button>
         </div>
 

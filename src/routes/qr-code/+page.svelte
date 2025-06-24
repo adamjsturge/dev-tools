@@ -43,7 +43,7 @@
 			class="mt-4 size-[600px] border border-ctp-text"
 			style="width: 200px; height: 200px;"
 		/>
-		<button onclick={saveQRCode} class="mt-4 cursor-pointer rounded bg-ctp-green p-2 text-white"
+		<button onclick={saveQRCode} class="mt-4 cursor-pointer rounded bg-ctp-green p-2 text-ctp-base"
 			>Save QR Code</button
 		>
 	{/if}

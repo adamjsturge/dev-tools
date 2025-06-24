@@ -287,8 +287,8 @@
 <main class="flex h-screen flex-col p-4 max-w-6xl mx-auto">
     <h1 class="mb-6 text-3xl font-bold text-center">⚡ EV Charging Estimator</h1>
     
-    <div class="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
-        <p class="text-blue-800 dark:text-blue-200">
+    <div class="mb-4 p-4 bg-ctp-surface0 rounded-lg text-center">
+        <p class="text-ctp-blue">
             <strong>Slow Charging Model:</strong> This estimator assumes linear charging throughout the entire process.
             Unlike fast charging which typically slows down at 80%, slow charging (Level 1/2) maintains a consistent rate.
         </p>
@@ -324,7 +324,7 @@
                     placeholder="45"
                     oninput={handleEstimatedMinutesInput}
                 />
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                <p class="text-sm text-ctp-subtext1 mt-2">
                     Time your car estimates to reach target charge
                 </p>
             </Section>
@@ -339,13 +339,13 @@
                         oninput={handleStartTimeInput}
                     />
                     <button
-                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 h-10"
+                        class="px-4 py-2 bg-ctp-blue text-ctp-base rounded hover:bg-ctp-sapphire h-10"
                         onclick={setCurrentTime}
                     >
                         Now
                     </button>
                 </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                <p class="text-sm text-ctp-subtext1 mt-2">
                     Set to see actual completion times
                 </p>
             </Section>
@@ -353,13 +353,13 @@
 
         <div class="flex justify-center gap-4 mt-8">
             <button
-                class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 font-semibold"
+                class="px-6 py-3 bg-ctp-green text-ctp-base rounded-lg hover:bg-ctp-teal font-semibold"
                 onclick={calculateCharging}
             >
                 Calculate Charging
             </button>
             <button
-                class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                class="px-6 py-3 bg-ctp-surface2 text-ctp-text rounded-lg hover:bg-ctp-overlay0"
                 onclick={reset}
             >
                 Reset
@@ -372,24 +372,24 @@
                     <h2 class="text-xl font-semibold">
                         Charging from {currentCharge}% to {targetCharge}% 
                     </h2>
-                    <p class="text-sm text-gray-600 dark:text-gray-400" aria-label="Total charging time: {formatTime(estimatedMinutes)}">
+                    <p class="text-sm text-ctp-subtext1" aria-label="Total charging time: {formatTime(estimatedMinutes)}">
                         Duration: {formatTime(estimatedMinutes)}
                     </p>
                 </div>
                 <button
-                    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                    class="px-4 py-2 bg-ctp-surface2 text-ctp-text rounded hover:bg-ctp-overlay0"
                     onclick={() => showResults = false}
                 >
                     Back to Settings
                 </button>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex-1">
+            <div class="bg-ctp-surface0 rounded-lg shadow-lg p-6 flex-1">
                 <div class="relative">
                     <svg
                         width="600"
                         height="400"
-                        class="border rounded-lg bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600"
+                        class="border rounded-lg bg-ctp-mantle border-ctp-surface1"
                         role="img"
                         aria-label="EV charging curve showing linear progression from {currentCharge}% to {targetCharge}% over {formatTime(estimatedMinutes)}"
                         onmousemove={handleMouseMove}
@@ -402,13 +402,13 @@
                                 y1={line.y1}
                                 x2={line.x2}
                                 y2={line.y2}
-                                class="stroke-gray-300 dark:stroke-gray-500"
+                                class="stroke-ctp-surface2"
                                 stroke-width="1"
                             />
                             <text
                                 x={line.labelX}
                                 y={line.labelY}
-                                class="fill-gray-600 dark:fill-gray-400"
+                                class="fill-ctp-subtext0"
                                 font-size="12"
                                 text-anchor={line.type === 'horizontal' ? 'end' : 'middle'}
                             >
@@ -418,7 +418,7 @@
                                 <text
                                     x={line.labelX}
                                     y={line.labelY + 15}
-                                    class="fill-gray-500 dark:fill-gray-500"
+                                    class="fill-ctp-subtext1"
                                     font-size="10"
                                     text-anchor="middle"
                                 >
@@ -431,19 +431,19 @@
                         <path
                             d={getChargingPath()}
                             fill="none"
-                            class="stroke-green-500 dark:stroke-green-400"
+                            class="stroke-ctp-green"
                             stroke-width="3"
                             stroke-linecap="round"
                         />
 
                         <!-- Current and target markers -->
-                        <circle cx="60" cy={340 - ((currentCharge - currentCharge) / chargeRange) * 280} r="6" class="fill-red-500 dark:fill-red-400" />
-                        <circle cx="540" cy={340 - (chargeRange / chargeRange) * 280} r="6" class="fill-green-500 dark:fill-green-400" />
+                        <circle cx="60" cy={340 - ((currentCharge - currentCharge) / chargeRange) * 280} r="6" class="fill-ctp-red" />
+                        <circle cx="540" cy={340 - (chargeRange / chargeRange) * 280} r="6" class="fill-ctp-green" />
                     </svg>
 
                     <!-- Hover tooltip -->
                     {#if hoverInfo.charge > 0}
-                        <div class="absolute top-4 right-4 bg-black dark:bg-gray-900 text-white p-3 rounded-lg text-sm shadow-lg">
+                        <div class="absolute top-4 right-4 bg-ctp-surface2 text-ctp-text p-3 rounded-lg text-sm shadow-lg border border-ctp-surface1">
                             <div><strong>{Math.round(hoverInfo.charge)}%</strong> charge</div>
                             <div>After {formatTime(hoverInfo.time)}</div>
                             {#if hoverInfo.actualTime && startTime}
@@ -456,45 +456,45 @@
                 <!-- Legend -->
                 <div class="mt-4 flex justify-center gap-6 text-sm">
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-red-500 dark:bg-red-400 rounded-full"></div>
-                        <span class="text-gray-700 dark:text-gray-300">Start ({currentCharge}%)</span>
+                        <div class="w-4 h-4 bg-ctp-red rounded-full"></div>
+                        <span class="text-ctp-text">Start ({currentCharge}%)</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-1 bg-green-500 dark:bg-green-400"></div>
-                        <span class="text-gray-700 dark:text-gray-300">Linear Charging Progress</span>
+                        <div class="w-4 h-1 bg-ctp-green"></div>
+                        <span class="text-ctp-text">Linear Charging Progress</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                        <span class="text-gray-700 dark:text-gray-300">Target ({targetCharge}%)</span>
+                        <div class="w-4 h-4 bg-ctp-green rounded-full"></div>
+                        <span class="text-ctp-text">Target ({targetCharge}%)</span>
                     </div>
                 </div>
 
                 <!-- Summary stats -->
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{chargeRange}%</div>
-                        <div class="text-gray-600 dark:text-gray-400">Charge Added</div>
+                    <div class="bg-ctp-blue/20 p-4 rounded-lg border border-ctp-blue/30">
+                        <div class="text-2xl font-bold text-ctp-blue">{chargeRange}%</div>
+                        <div class="text-ctp-subtext0">Charge Added</div>
                     </div>
-                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600 dark:text-green-400" aria-label="Total time: {formatTime(estimatedMinutes)}">
+                    <div class="bg-ctp-green/20 p-4 rounded-lg border border-ctp-green/30">
+                        <div class="text-2xl font-bold text-ctp-green" aria-label="Total time: {formatTime(estimatedMinutes)}">
                             {formatTimeShort(estimatedMinutes)}
                         </div>
-                        <div class="text-gray-600 dark:text-gray-400">Total Time</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                        <div class="text-ctp-subtext0">Total Time</div>
+                        <div class="text-xs text-ctp-subtext1 mt-1">
                             {formatTime(estimatedMinutes)}
                         </div>
                     </div>
                     {#if startTime}
-                        <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
-                            <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                        <div class="bg-ctp-mauve/20 p-4 rounded-lg border border-ctp-mauve/30">
+                            <div class="text-2xl font-bold text-ctp-mauve">
                                 {addMinutesToTime(startTime, estimatedMinutes)}
                             </div>
-                            <div class="text-gray-600 dark:text-gray-400">Completion Time</div>
+                            <div class="text-ctp-subtext0">Completion Time</div>
                         </div>
                     {:else}
-                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                            <div class="text-lg text-gray-500 dark:text-gray-400">Set start time</div>
-                            <div class="text-gray-600 dark:text-gray-500">for completion time</div>
+                        <div class="bg-ctp-surface1 p-4 rounded-lg border border-ctp-surface2">
+                            <div class="text-lg text-ctp-subtext1">Set start time</div>
+                            <div class="text-ctp-subtext0">for completion time</div>
                         </div>
                     {/if}
                 </div>

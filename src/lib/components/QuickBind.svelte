@@ -46,7 +46,7 @@
 <div class="flex gap-2 flex-wrap">
     {#each presets as preset}
         <button
-            class="px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+            class="px-3 py-1 text-sm font-medium text-ctp-base bg-ctp-blue rounded-md hover:bg-ctp-sapphire"
             on:click={() => applyPreset(preset)}
         >
             {preset.label}

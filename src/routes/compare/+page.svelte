@@ -141,13 +141,13 @@
     
     <div class="mb-4 flex gap-2">
         <button 
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            class="px-4 py-2 bg-ctp-blue text-ctp-base rounded hover:bg-ctp-sapphire"
             on:click={compareTexts}
         >
             Compare Texts
         </button>
         <button 
-            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+            class="px-4 py-2 bg-ctp-surface2 text-ctp-text rounded hover:bg-ctp-overlay0"
             on:click={clearAll}
         >
             Clear All
@@ -182,27 +182,27 @@
             <div class="mb-4 flex items-center gap-4">
                 <h2 class="text-lg font-semibold">Comparison Result</h2>
                 <button 
-                    class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 text-sm"
+                    class="px-3 py-1 bg-ctp-surface2 text-ctp-text rounded hover:bg-ctp-overlay0 text-sm"
                     on:click={() => showDiff = false}
                 >
                     Back to Edit
                 </button>
             </div>
             
-            <div class="mb-4 text-sm text-gray-600">
-                <span class="inline-block w-4 h-4 bg-red-200 border border-red-400 mr-2"></span>Removed from original
-                <span class="inline-block w-4 h-4 bg-green-200 border border-green-400 mr-2 ml-4"></span>Added in comparison
-                <span class="inline-block w-4 h-4 bg-gray-100 border border-gray-300 mr-2 ml-4"></span>Unchanged
+            <div class="mb-4 text-sm text-ctp-subtext1">
+                <span class="inline-block w-4 h-4 bg-ctp-red/30 border border-ctp-red mr-2"></span>Removed from original
+                <span class="inline-block w-4 h-4 bg-ctp-green/30 border border-ctp-green mr-2 ml-4"></span>Added in comparison
+                <span class="inline-block w-4 h-4 bg-ctp-surface1 border border-ctp-surface2 mr-2 ml-4"></span>Unchanged
             </div>
             
-            <div class="border rounded-lg p-4 bg-white font-mono text-sm whitespace-pre-wrap">
+            <div class="border rounded-lg p-4 bg-ctp-surface0 border-ctp-surface1 font-mono text-sm whitespace-pre-wrap">
                 {#each diffResult as line}
                     {#if line.type === 'equal'}
-                        <div class="bg-gray-50 px-2 py-1 border-l-4 border-gray-300">{line.content}</div>
+                        <div class="bg-ctp-surface1 px-2 py-1 border-l-4 border-ctp-surface2">{line.content}</div>
                     {:else if line.type === 'removed'}
-                        <div class="bg-red-50 px-2 py-1 border-l-4 border-red-400 text-red-800">- {line.content}</div>
+                        <div class="bg-ctp-red/20 px-2 py-1 border-l-4 border-ctp-red text-ctp-red">- {line.content}</div>
                     {:else if line.type === 'added'}
-                        <div class="bg-green-50 px-2 py-1 border-l-4 border-green-400 text-green-800">+ {line.content}</div>
+                        <div class="bg-ctp-green/20 px-2 py-1 border-l-4 border-ctp-green text-ctp-green">+ {line.content}</div>
                     {/if}
                 {/each}
             </div>

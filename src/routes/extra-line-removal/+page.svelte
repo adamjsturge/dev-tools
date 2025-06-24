@@ -44,7 +44,7 @@
     <h1 class="mb-4 text-2xl font-bold">Extra Line Removal</h1>
     <div class="mb-4 w-[90%] flex justify-end">
         <button 
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            class="px-4 py-2 bg-ctp-blue text-ctp-base rounded hover:bg-ctp-sapphire"
             on:click={removeExtraLines}
         >
             Remove Extra Lines

@@ -1,0 +1,120 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Dev Tools Project - Cursor Rules
+
+## Tech Stack & Framework
+- **Svelte 5**: Using latest Svelte 5 features including `$state`, `$derived`, `$props()`, and runes syntax
+- **SvelteKit**: Full-stack framework with file-based routing
+- **JavaScript with JSDoc**: NO TypeScript - use JSDoc comments for type annotations
+- **Tailwind CSS**: Utility-first CSS framework
+- **Vite**: Build tool and dev server
+
+## Key Concepts
+- We try to minimize as many 3rd party libraries as possible
+- This site is intended to be hosted statically with no backend
+
+## Type Annotations
+- Use JSDoc syntax, NOT TypeScript
+- Examples:
+  ```javascript
+  /** @type {string} */
+  let value = '';
+  
+  /** @type {Array<{name: string, id: number}>} */
+  let items = [];
+  
+  /**
+   * @param {string} input
+   * @param {number} count
+   * @returns {string}
+   */
+  function processInput(input, count) { ... }
+  ```
+
+## Svelte 5 Conventions
+- Use `$state()` for reactive variables: `let count = $state(0)`
+- Use `$derived()` for computed values: `const doubled = $derived(count * 2)`
+- Use `$props()` for component props: `let { title, items = [] } = $props()`
+- Use `$effect()` for side effects instead of `onMount` when appropriate
+- Event handlers use `on:click` syntax, not `onclick` (though both work)
+
+## Theme System - Catppuccin
+- **Theme Variants**: latte, frappe, macchiato, mocha
+- **Color Prefix**: All theme colors use `ctp-` prefix
+- **Theme Switching**: Handled via CSS classes on body element (`ctp-latte`, `ctp-macchiato`, etc.)
+
+### Common Theme Colors:
+- **Backgrounds**: `bg-ctp-base`, `bg-ctp-surface0`, `bg-ctp-surface1`, `bg-ctp-surface2`
+- **Text**: `text-ctp-text`, `text-ctp-subtext0`, `text-ctp-subtext1`
+- **Accents**: `bg-ctp-blue`, `bg-ctp-green`, `bg-ctp-red`, `bg-ctp-mauve`, `bg-ctp-pink`
+- **Interactive**: `hover:bg-ctp-sapphire`, `hover:bg-ctp-teal`
+- **Overlays**: `bg-ctp-overlay0`, `bg-ctp-overlay1`, `bg-ctp-overlay2`
+
+### Color Usage Rules:
+- **NEVER** use hardcoded colors like `bg-blue-500`, `text-gray-600`, etc.
+- **NEVER** use `dark:` variants - theme system handles all color variations
+- **ALWAYS** use `ctp-` prefixed colors for theme consistency
+- **Buttons**: Primary = `bg-ctp-blue text-ctp-base hover:bg-ctp-sapphire`
+- **Secondary**: `bg-ctp-surface2 text-ctp-text hover:bg-ctp-overlay0`
+- **Success**: `bg-ctp-green text-ctp-base hover:bg-ctp-teal`
+
+## File Structure
+- **Routes**: `src/routes/` - SvelteKit file-based routing
+- **Components**: `src/lib/components/` - Reusable components
+- **Utils**: `src/lib/utils/` - Utility functions
+- **Shared Components**: `src/components/` - App-specific components
+
+## Component Patterns
+- Use `Section.svelte` for consistent page sections
+- Use `Input.svelte` for form inputs with consistent styling
+- Use `TextArea.svelte` for text areas with theme support
+- Use `Tile.svelte` for statistic/info display cards
+- Use `QuickBind.svelte` for preset button groups
+
+## Storage & State
+- Use localStorage for persisting user data
+- Clear storage when values are empty/default
+- Use unique storage keys per tool/feature
+- Example: `const STORAGE_KEY = 'tool-name-field'`
+
+## Accessibility
+- Always include proper ARIA labels
+- Use semantic HTML elements
+- Provide keyboard navigation support
+- Include proper focus management
+
+## Code Style
+- Use consistent indentation (tabs preferred)
+- Use descriptive variable names
+- Add JSDoc comments for complex functions
+- Keep components focused and single-purpose
+- Use Svelte 5 runes consistently
+
+## Build & Development
+- **Dev**: `npm run dev`
+- **Build**: `npm run build`
+- **Preview**: `npm run preview`
+- **Lint**: `npm run lint`
+- **Format**: `npm run format`
+
+## Key Dependencies
+- `@catppuccin/tailwindcss` - Theme system
+- `jszip` - ZIP file handling
+- `qrcode` - QR code generation
+- `@tailwindcss/typography` - Typography plugin
+
+## Common Patterns
+1. **Tool Pages**: Usually have input section, process button, and results display
+2. **State Management**: Use `$state()` for reactive data, localStorage for persistence  
+3. **Error Handling**: Use try-catch blocks and user-friendly error messages
+4. **File Processing**: Handle FileList inputs, blob processing, and downloads
+5. **Responsive Design**: Use Tailwind responsive prefixes (md:, lg:, etc.)
+
+## Theme Testing
+- Always test color changes across all 4 theme variants
+- Use the theme selector in navigation to verify appearance
+- Ensure proper contrast and readability in all themes
+- Check that interactive elements have proper hover/focus states 
