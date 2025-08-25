@@ -142,13 +142,13 @@
     <div class="mb-4 flex gap-2">
         <button 
             class="px-4 py-2 bg-ctp-blue text-ctp-base rounded hover:bg-ctp-sapphire"
-            on:click={compareTexts}
+            onclick={compareTexts}
         >
             Compare Texts
         </button>
         <button 
             class="px-4 py-2 bg-ctp-surface2 text-ctp-text rounded hover:bg-ctp-overlay0"
-            on:click={clearAll}
+            onclick={clearAll}
         >
             Clear All
         </button>
@@ -183,7 +183,7 @@
                 <h2 class="text-lg font-semibold">Comparison Result</h2>
                 <button 
                     class="px-3 py-1 bg-ctp-surface2 text-ctp-text rounded hover:bg-ctp-overlay0 text-sm"
-                    on:click={() => showDiff = false}
+                    onclick={() => showDiff = false}
                 >
                     Back to Edit
                 </button>

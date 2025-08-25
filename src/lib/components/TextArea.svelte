@@ -1,4 +1,6 @@
 <script>
+    import { onMount } from 'svelte';
+    
     /** @type {string} */
     export let value = '';
     /** @type {string} */
@@ -10,6 +12,12 @@
 
     /** @type {HTMLTextAreaElement} */
     let textareaElement;
+
+    onMount(() => {
+        if (autofocus) {
+            textareaElement?.focus();
+        }
+    });
 
     /** 
      * Focuses the textarea element
@@ -25,7 +33,6 @@
     bind:value
     class="resize rounded border border-ctp-surface0 bg-ctp-surface0 p-4 font-mono focus:outline-none {customClass}"
     {placeholder}
-    {autofocus}
     on:input
 >
 </textarea>
