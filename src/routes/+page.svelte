@@ -23,7 +23,8 @@
 	const tools = [
 		{ href: "/base64/encode", title: "Base64 Encode", meta: "encode,base64,tool" },
 		{ href: "/base64/decode", title: "Base64 Decode", meta: "decode,base64,tool" },
-		{ href: "/qr-code", title: "QR Code", meta: "qr,code,tool" },
+		{ href: "/qr-code", title: "QR Code Generator", meta: "qr,code,tool" },
+		{ href: "/qr-code/scan", title: "QR Code Scanner", meta: "qr,code,scan,tool" },
 		{ href: "/url/encode", title: "URL Encode", meta: "encode,url,tool" },
 		{ href: "/url/decode", title: "URL Decode", meta: "decode,url,tool" },
 		{ href: "/webp", title: "WebP Converter", meta: "webp,convert,tool" },
