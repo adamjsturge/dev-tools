@@ -38,6 +38,7 @@
 		{ href: "/deckbuilder-links", title: "Deckbuilder Links", meta: "deck,deckbuilder,links,egman,cardkaizoku,gumgum,tool" },
 		{ href: "/compare", title: "Text Compare", meta: "text,compare,diff,tool" },
 		{ href: "/ev-charging", title: "EV Charging", meta: "ev,charging,tool" },
+		{ href: "/color-opacity", title: "Color Opacity", meta: "color,opacity,alpha,hex,rgba,transparency,tool" },
 	];
 
 	/** @type {string} */
